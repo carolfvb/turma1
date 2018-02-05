@@ -5,6 +5,8 @@ require 'pry'
  require 'capybara/poltergeist'
 
 EL=YAML.load_file('data/elemento.yml')
+MASSA=YAML.load_file('data/massa.yml')
+
 
  if ENV['chrome']
    Capybara.default_driver = :chrome

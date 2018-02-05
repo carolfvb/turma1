@@ -23,7 +23,7 @@ Quando(/^selecionar a "([^"]*)"$/) do |nao|
   find(EL[nao], wait: 10).click
 end
 
-Quando(/^clicar no botão "([^"]*)"$/) do |continuar|
+Quando(/^clicar no botao "([^"]*)"$/) do |continuar|
   find(EL[continuar], wait: 10).click
 end
 
@@ -31,16 +31,14 @@ Então(/^exibe a tela de cadastro do usuario$/) do
   assert_selector(EL['titulo_identificacao'])
 end
 
-
-
-Quando(/^preencho os campos obrigatorios$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+Quando(/^preencho os campos obrigatorios com dados "([^"]*)"$/) do |massa|
+  PaginaCadastro.new.send("preencher_cadastro_#{massa}")
 end
 
 Quando(/^clicar no botao salvar$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+  PaginaCadastro.new.clicar_continuar_cadastro
 end
 
-Entao(/^exibe mensagem de sucesso$/) do
-  pending # Write code here that turns the phrase above into concrete actions
+Entao(/^retorna para a home com o usuário logado$/) do
+assert_selector(EL['texto_usuario_logado'], wait: 10)
 end
