@@ -1,34 +1,32 @@
-Dado(/^que eu acesso o site da Casas Bahia$/) do
-  visit('https://www.casasbahia.com.br')
+Dado(/^que eu acesso o site "([^"]*)"$/) do |site|
+  visit(site)
 end
 
-Quando(/^eu pesquiso "([^"]*)"$/) do |arg1|
-  PaginaHome.new.pesquisa_produto(arg1)
+Quando(/^eu pesquiso "([^"]*)"$/) do |produto|
+  PaginaHome.new.pesquisa_produto(produto)
 end
 
-Então(/^é exibido uma lista de "([^"]*)"$/) do |menssagem|
-    textoResultado = (all('.name.fn')[0]).text
-    if textoResultado.include?(menssagem)
-      p "sucesso"
-    else
-      raise "texto não encontrado"
-    end
+Então(/^é exibido uma lista de "([^"]*)"$/) do |mensagem|
+  PaginaAssert.new.valida_pesquisa_produto(mensagem)
 end
 
 Quando(/^eu clicar no link "([^"]*)"$/) do |link|
-  find(EL[link], wait: 10).click
+  #find(EL[link], wait: 10).click
+  PaginaCommon.new.clicar_elemento(link)
 end
 
 Quando(/^selecionar a "([^"]*)"$/) do |nao|
-  find(EL[nao], wait: 10).click
+  PaginaCommon.new.clicar_elemento(nao)
+  #find(EL[nao], wait: 10).click
 end
 
 Quando(/^clicar no botao "([^"]*)"$/) do |continuar|
-  find(EL[continuar], wait: 10).click
+  #find(EL[continuar], wait: 10).click
+  PaginaCommon.new.clicar_elemento(continuar)
 end
 
-Então(/^exibe a tela de cadastro do usuario$/) do
-  assert_selector(EL['titulo_identificacao'])
+Então(/^exibe a tela de "([^"]*)"$/) do |tela|
+  PaginaAssert.new.valida_exibicao_pagina(tela)
 end
 
 Quando(/^preencho os campos obrigatorios com dados "([^"]*)"$/) do |massa|
@@ -37,8 +35,4 @@ end
 
 Quando(/^clicar no botao salvar$/) do
   PaginaCadastro.new.clicar_continuar_cadastro
-end
-
-Entao(/^retorna para a home com o usuário logado$/) do
-assert_selector(EL['texto_usuario_logado'], wait: 10)
 end

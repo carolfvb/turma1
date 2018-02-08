@@ -3,48 +3,52 @@ class PaginaCadastro
     include Capybara::DSL
 
   def preencher_cadastro_fisica()
-    valor = CADASTRO[:fisica]
+
+    assert_selector(EL['rb_pessoa_fisica'])
     find(EL['rb_pessoa_fisica']).click
-    find(EL['texto_nome_completo']).set(valor[:nome])
-    find(EL['texto_cpf']).set(eval(MASSA['cpf']))
-    find(EL['selecao_telefone1_residencial']).find(:option, valor[:tipo_telefone1]).select_option
-    find(EL['texto_ddd1_residencial']).set(valor[:numero_ddd_tel1])
-    find(EL['telefone_residencial']).set(valor[:numero_tel1])
-    find(EL['data_nasc_dia']).set(valor[:data_nascimento][0])
-    find(EL['data_nasc_mes']).set(valor[:data_nascimento][1])
-    find(EL['data_nasc_ano']).set(valor[:data_nascimento][2])
+    valor = CADASTRO[:fisica]
+    campo = [EL['texto_nome_completo'],EL['texto_cpf'],EL['texto_ddd1_residencial'],EL['telefone_residencial'],
+    EL['data_nasc_dia'],EL['data_nasc_mes'],EL['data_nasc_ano'],EL['email'],EL['confirma_email'],EL['senha'],EL['confirma_senha']]
+
+    dados = [valor[:nome],valor[:cpf],valor[:numero_ddd_tel1],valor[:numero_tel1],valor[:data_nascimento][0],valor[:data_nascimento][1],valor[:data_nascimento][2],
+    valor[:email],valor[:email],valor[:senha],valor[:senha]]
+
+    valor = Hash[campo.zip(dados)]
+
+    valor.each do |campo, dados|
+      find(campo).set(dados)
+    end
+
+    find(EL['selecao_telefone1_residencial']).all(:option, valor[:tipo_telefone1])[0].select_option
+
       if valor[:sexo] == 'M'
         find(EL['seleciona_sexo_m']).click
       else
         find(EL['seleciona_sexo_f']).click
       end
-    find(EL['email']).set(valor[:email])
-    find(EL['confirma_email']).set(valor[:email])
-    find(EL['senha']).set(valor[:senha])
-    find(EL['confirma_senha']).set(valor[:confirmar_senha])
-
   end
 
   def preencher_cadastro_juridica()
+    assert_selector(EL['rb_pessoa_juridica'])
     valor = CADASTRO[:juridica]
     find(EL['rb_pessoa_juridica']).click
-    find(EL['texto_razao_social']).set(valor[:nome])
-    find(EL['texto_nome_fantasia']).set(valor[:nome])
-    find(EL['texto_cnpj']).set(valor[:cnpj])
-    find(EL['selecao_estado']).find(:option, valor[:sede_inscricao_estadual]).select_option
-    find(EL['texto_inscricao_estadual']).set(valor[:inscricao_estadual])
-    find(EL['selecao_telefone1_residencial']).find(:option, valor[:tipo_telefone1]).select_option
-    find(EL['texto_ddd_pj']).set(valor[:numero_ddd_tel1])
-    find(EL['texto_telefone_pj']).set(valor[:numero_tel1])
-    find(EL['link_remover_telefone2']).click
-    find(EL['email']).set(valor[:email])
-    find(EL['confirma_email']).set(valor[:email])
-    find(EL['senha']).set(valor[:senha])
-    find(EL['confirma_senha']).set(valor[:confirmar_senha])
+    campo = [EL['texto_razao_social'],EL['texto_nome_fantasia'],EL['texto_cnpj'],EL['texto_inscricao_estadual'],
+            EL['texto_ddd_pj'],EL['texto_telefone_pj'],EL['email'],EL['confirma_email'],EL['senha'],EL['confirma_senha']]
+    dados = [valor[:nome], valor[:nome], valor[:cnpj], valor[:inscricao_estadual], valor[:numero_ddd_tel1],
+            valor[:numero_tel1], valor[:email], valor[:email], valor[:senha], valor[:senha]]
+    valor = Hash[campo.zip(dados)]
 
+    valor.each do |campo,dados|
+      find(campo).set(dados)
+    end
+
+    find(EL['selecao_estado']).all(:option, valor[:sede_inscricao_estadual])[0].select_option
+    find(EL['selecao_telefone1_residencial']).all(:option, valor[:tipo_telefone1])[0].select_option
+    find(EL['link_remover_telefone2']).click
   end
 
   def clicar_continuar_cadastro
     find(EL['botao_cadastro_continuar']).click
   end
+
 end

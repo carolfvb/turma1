@@ -10,8 +10,7 @@ CADASTRO = {
     numero_tel1: '47289388',
     data_nascimento: ['26','01','1989'],
     sexo: 'M',
-    senha: 'homolog01',
-    confirmar_senha: 'homolog01'
+    senha: 'homolog01'
   },
   juridica: {
     nome: FFaker::Name.name,
@@ -22,8 +21,7 @@ CADASTRO = {
     tipo_telefone1: 'Comercial',
     numero_ddd_tel1: '11',
     numero_tel1: '47289388',
-    senha: 'homolog01',
-    confirmar_senha: 'homolog01'
+    senha: 'homolog01'
   }
 
 }

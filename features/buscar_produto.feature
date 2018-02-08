@@ -5,7 +5,7 @@ Funcionalidade: Busca de produto
 
 
 Esquema do Cenário: Busca de produto
-  Dado que eu acesso o site da Casas Bahia
+  Dado que eu acesso o site "https://www.casasbahia.com.br"
   Quando eu pesquiso <produto>
   Então é exibido uma lista de <produto>
 

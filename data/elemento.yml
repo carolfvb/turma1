@@ -1,6 +1,6 @@
 #Página Home
-texto_buscar_pagina_inicial: '#ctl00_TopBar_PaginaSistemaArea1_ctl11_ctl00_txtBusca'
-botao_buscar_pagina_inicial: '#ctl00_TopBar_PaginaSistemaArea1_ctl11_ctl00_btnOK'
+texto_buscar_pagina_inicial: 'input[id*=txtBusca]'
+botao_buscar_pagina_inicial: 'button[id*=btnOK]'
 texto_resultado_pagina_resultado: '.name.fn'
 link_cadastre-se: '#lnkCadastreSe'
 
@@ -25,9 +25,9 @@ confirma_senha: '#ConfirmarSenha'
 botao_cadastro_continuar: '#btnClienteSalvar'
 rb_opcao_nao: '#rbNaoCadastrado'
 botao_continuar_cadastro: '#btnClienteLogin'
-titulo_identificacao: 'h2[data-id=titulo]'
 botao_salvar_cadastro: '#btnClienteSalvar'
-texto_usuario_logado: '#lblLoginMsg'
+usuario_logado: '#lblLoginMsg'
+cadastro_do_usuario: 'h2[data-id=titulo]'
 
 #Pessoa juridica
 rb_pessoa_juridica: '.pJuridica .fRadio'
